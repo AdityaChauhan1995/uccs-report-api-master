@@ -1,0 +1,136 @@
+{  
+   "name":"WBB Report Activated",
+   "type":"Standard Report",
+   "frequency":"Monthly",
+   "estimatedDuration":"60",
+   "inputs":[  
+	{  
+         "columnName":"MFS03 ",
+         "allowedOperators":"equals",
+         "allowMultiple":false,
+         "allowFileUpload":false,
+         "allowedValues":[  
+            {  
+               "key":1,
+               "text":"Status",
+               "value":"B"
+            }
+         ]
+      },
+	  {  
+         "columnName":"cservicestatus ",
+         "allowedOperators":"not equals",
+         "allowMultiple":false,
+         "allowFileUpload":false,
+         "allowedValues":[  
+            {  
+               "key":1,
+               "text":"Status",
+               "value":"D"
+            }
+         ]
+      }
+   ],
+   "outputs":[  
+      {  
+         "columnName":"szagreementno"
+      },
+      {  
+         "columnName":"szname"
+      },
+      {  
+         "columnName":"cservicestatus"
+      },
+      {  
+         "columnName":"szmobileno"
+      },
+      {  
+         "columnName":"mfs02 DC"
+      },
+      {  
+         "columnName":"szcyclecode"
+      },
+      {  
+         "columnName":"dtregistration"
+      },
+      {  
+         "columnName":"szmarketsegdesc"
+      },
+      {  
+         "columnName":"szrateplan"
+      },
+      {  
+         "columnName":"ioddays"
+      },
+      {  
+         "columnName":"szbucketcode"
+      },
+      {  
+         "columnName":"fosamt"
+      },
+      {  
+         "columnName":"foverdueamt"
+      },
+      {  
+         "columnName":"fbucket0"
+      },
+      {  
+         "columnName":"fbucket1"
+      },
+      {  
+         "columnName":"fbucket2"
+      },
+      {  
+         "columnName":"fbucket3"
+      },
+      {  
+         "columnName":"fbucket4"
+      },
+      {  
+         "columnName":"fbucket5"
+      },
+      {  
+         "columnName":"fbucket6"
+      },
+      {  
+         "columnName":"fbucketamt7"
+      },
+      {  
+         "columnName":"szproductcode"
+      },
+      {  
+         "columnName":"szmoccode"
+      },
+      {  
+         "columnName":"mfs04"
+      },
+      {  
+         "columnName":"szmktcode"
+      },
+      {  
+         "columnName":"szMktCode_decode"
+      },
+      {  
+         "columnName":"szcollectioncode"
+      },
+      {  
+         "columnName":"szCollectioncode_decode"
+      },
+      {  
+         "columnName":"priority"
+      },
+      {  
+         "columnName":"zriskcode"
+      },
+      {  
+         "columnName":"szpaymenttype"
+      },
+		{"columnName": "Rate Plan"},
+		{"columnName": "Total SI"},
+		{"columnName": "Total Active SI"},
+		{"columnName": "Total Barred SI"},
+		{"columnName": "Total Suspended SI"},
+		{"columnName": "Total Deactive SI"},
+		{"columnName":  "Deactivation date"},
+   ]
+}	

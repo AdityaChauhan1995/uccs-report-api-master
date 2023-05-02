@@ -1,0 +1,34 @@
+{
+    "_id": {
+        "$oid": "5c80b6775d34340f10c5422e"
+    },
+    "name": "Device Finance Report(Active/Deactive)",
+    "type": "Standard Report",
+    "frequency": "Monthly",
+    "estimatedDuration": "60",
+    "inputAllowed": "false",
+    "queryConstant": "device_finance_report_query",
+    "inputs": [],
+    "outputs": [],
+    "__v": {
+        "$numberInt": "0"
+    },
+    "days2NextRun": {
+        "$date": {
+            "$numberLong": "1602385864063"
+        }
+    },
+    "downloadUrl": {
+        "errorNum": {
+            "$numberInt": "918"
+        },
+        "offset": {
+            "$numberInt": "762"
+        }
+    },
+    "lastRun": {
+        "$date": {
+            "$numberLong": "1599793864063"
+        }
+    }
+}

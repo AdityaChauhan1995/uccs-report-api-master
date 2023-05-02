@@ -1,0 +1,261 @@
+
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema,
+    logger = require('../logs/logger').Logger;
+
+var reports = new Schema({
+    "name": "",
+    "type": "",
+    "frequency": "",
+    "estimatedDuration": "",
+    "lastRun": "",
+    "days2NextRun": "",
+    "downloadUrl": "",
+    "inputAllowed": "",
+    "queryConstant": "",
+    "inputs": [
+        {
+            "columnName": "",
+            "allowedOperators": "",
+            "allowMultiple": "",
+            "allowFileUpload": "",
+            "isDateColumn" : "",
+            "allowedValues": [
+                { "key": "", "text": "", "value": "" }
+            ]
+        }
+    ],
+    "outputs": [
+        {
+           "seq": { type: Number, default:  0 },
+           "columnName": { type: String, default: "" }
+        }
+    ]
+});
+var adhoc_report_input = new Schema({
+    "reportId": "",
+    "columns": [
+        { "key": "", "text": "", "value": "" }
+    ],
+    "columnsMeta": [
+        {
+            "columnName": "",
+            "allowedOperators": [
+                { "key": "", "text": "", "value": "" }
+            ],
+            "allowMultiple": "",
+            "allowFileUpload": "",
+            "allowedValues": [
+                { "key": "", "text": "", "value": "" }
+            ]
+        }
+    ]
+});
+var adhoc_report_output = new Schema({
+    "reportId": "",
+    "columns": [
+        {  "columnName": "" }
+    ]
+});
+
+
+
+var reportModel = mongoose.model('reports', reports);
+var adhocReportInput = mongoose.model('adhoc_report_input', adhoc_report_input);
+var adhocReportOutput = mongoose.model('adhoc_report_output', adhoc_report_output);
+
+module.exports = reportModel;
+
+module.exports.findReport = function (callback) {
+    var options = {};
+    reportModel.find(function (err, data) {
+        if (err || !data)
+            callback({ code: -1, message: 'No Report found in database' });
+        else {
+            callback({
+                code: 0, message: "SUCCESS",
+                response: { data }
+            });
+        }
+    });
+
+}
+
+
+module.exports.createReport = function (data, callback) {
+
+    var newReport = new reportModel({
+        name: data.name,
+        type: data.type,
+        frequency: data.frequency,
+        estimatedDuration: data.estimatedDuration,
+        inputAllowed: data.inputAllowed,
+        queryConstant: data.queryConstant,
+        inputs: data.inputs,
+        outputs: data.outputs
+    });
+
+    newReport.save(function (err, doc) {
+        if (err || !doc)
+            callback({ code: -1, message: 'Error in report creation :' + err });
+        else
+            callback({ code: 0, message: 'Report created - SUCCEES' })
+    });
+}
+
+module.exports.findReportById = function (id, callback) {
+
+    reportModel.findById(id, 'name type estimatedDuration downloadUrl', function (err, data) {
+        if (err || !data)
+            callback(null, err);
+        else
+            callback(data, null);
+    });
+
+}
+
+
+module.exports.findAdhocReportInput = function (repId, callback) {
+
+    var query = { reportId: repId };
+    var options = {};
+    adhocReportInput.findOne(query, function (err, data) {
+        if (err)
+            callback({ code: -1, message: 'Error in fetching adhoc output columns :' + err });
+        if (!data)
+            callback({ code: 1, message: 'No record for reportId' + repId });
+        if (data)
+            callback({ code: 0, message: 'SUCCESS', response: { columns: data.columns, columnsMeta: data.columnsMeta } });
+    });
+
+}
+
+module.exports.createAdhocReportInput = function (data, reportId, callback) {
+
+    module.exports.findReportById(reportId, function (reportdata, err) {
+
+        if (err || !reportdata)
+            callback({ code: -1, message: 'Invalid Report Id' });
+        else {
+            var newInput = new adhocReportInput({
+                reportId: reportId,
+                columns: data.columns,
+                columnsMeta: data.columnsMeta
+            });
+
+            newInput.save(function (err, doc) {
+                if (err || !doc)
+                    callback({ code: -1, message: 'Error in report creation :' + err });
+                else
+                    callback({ code: 0, message: 'Adhoc Report Input columns added - SUCCEES' })
+            });
+        }
+
+    });
+}
+
+module.exports.findAdhocReportOutput = function (id, callback) {
+
+    var query = { reportId: id };
+    var options = {};
+    adhocReportOutput.findOne(query, function (err, data) {
+        if (err || !data)
+            callback({ code: -1, message: 'Error in fetching adhoc output columns :' + err });
+        else
+            callback({ code: 0, message: 'SUCCESS', response: { columns: data.columns } });
+    });
+
+}
+
+
+module.exports.createAdhocReportOutput = function (data, reportId, callback) {
+
+    module.exports.findReportById(reportId, function (reportdata, err) {
+
+        if (err || !reportdata)
+            callback({ code: -1, message: 'Invalid Report Id' });
+        else {
+            var newOutput = new adhocReportOutput({
+                reportId: reportId,
+                columns: data.columns
+            });
+
+            newOutput.save(function (err, doc) {
+                if (err || !doc)
+                    callback({ code: -1, message: 'Error in report creation :' + err });
+                else
+                    callback({ code: 0, message: 'Adhoc Report Output columns added - SUCCEES' })
+            });
+        }
+
+    });
+
+}
+
+
+module.exports.getReportById = function (id,callback) {
+      //'reportName reportType createdDate completedDate estimatedDuration downloadUrl'
+        reportModel.findById(id, function (err, data) {
+            if (err || (data.length == 0) || !data )
+                callback(err ? err : new Error('No new request to process'), null);
+             else
+                callback(null, data);
+        });
+}
+
+
+
+
+module.exports.findMonthlyReport = function (reportCriteria, callback) {
+    var query = {
+        type: reportCriteria.reportType, inputAllowed: reportCriteria.inputAllowed, frequency: reportCriteria.frequency
+    };
+    var options = {};
+    console.log("inside find monthly report ");
+    reportModel.find(query, function (error, data) {
+
+        if (error || (data.length == 0))
+            callback(error ? error : new Error('No new request to process'), null);
+        else
+            callback(null, data);
+    });
+
+}
+
+
+module.exports.updateReportStatus = function (id, fileName, nextRunAt, lastRunAt, callback) {
+    reportModel.findByIdAndUpdate(id, { lastRun: lastRunAt, downloadUrl: fileName, days2NextRun: nextRunAt },
+        { returnNewDocument: true }, function (err, newrequest) {
+            if (err)
+                callback(false, err);
+            else
+                callback(true, null);
+        });
+}
+
+module.exports.updateScheduledReportStatus = function (reportType, fileName, nextRunAt, lastRunAt, callback) {
+    reportModel.updateOne({type:reportType}, { lastRun: lastRunAt, downloadUrl: fileName, days2NextRun: nextRunAt },
+        { returnNewDocument: true }, function (err, newrequest) {
+            if (err)
+                callback(false, err);
+            else
+                callback(true, null);
+        });
+}
+
+
+module.exports.findScheduledReport = function (reportType, callback) {
+
+    var query = { type: reportType };
+    var options = {};
+    reportModel.find(query, function (err, data) {
+        if (err || !data)
+            callback({ code: -1, message: 'No Scheduled Report found in database' });
+        else {
+            callback({
+                code: 0, message: "SUCCESS",
+                response: { data }
+            });
+        }
+    });
+}

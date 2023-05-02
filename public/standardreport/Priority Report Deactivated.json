@@ -1,0 +1,162 @@
+{
+    "name": "Priority Report Deactivated",
+    "type": "Standard Report",
+    "frequency": "Monthly",
+    "estimatedDuration": "60",
+    "inputs": [
+        {
+            "columnName": "mfs06",
+            "allowedOperators": "=",
+            "allowMultiple": true,
+            "allowFileUpload": false,
+            "allowedValues": [
+                {
+                    "key": 1,
+                    "text": "P1",
+                    "value": "P1"
+                },
+                {
+                    "key": 2,
+                    "text": "P2",
+                    "value": "P2"
+                },
+                {
+                    "key": 2,
+                    "text": "P3",
+                    "value": "P3"
+                },
+                {
+                    "key": 2,
+                    "text": "P4",
+                    "value": "P4"
+                },
+                {
+                    "key": 2,
+                    "text": "P5",
+                    "value": "P5"
+                }
+            ]
+        },
+        {
+            "columnName": "cservicestatus ",
+            "allowedOperators": "not equals",
+            "allowMultiple": false,
+            "allowFileUpload": false,
+            "allowedValues": [
+                {
+                    "key": 1,
+                    "text": "Status",
+                    "value": "D"
+                }
+            ]
+        },
+        {
+            "columnName": "fosamt",
+            "allowedOperators": "not equals",
+            "allowMultiple": false,
+            "allowFileUpload": false,
+            "allowedValues": [
+                {
+                    "key": 1,
+                    "text": "Outstanding Amount",
+                    "value": "0"
+                }
+            ]
+        }
+    ],
+    "outputs": [
+        {
+            "columnName": "szagreementno"
+        },
+        {
+            "columnName": "szname"
+        },
+        {
+            "columnName": "cservicestatus"
+        },
+        {
+            "columnName": "szmobileno"
+        },
+        {
+            "columnName": "mfs02 DC"
+        },
+        {
+            "columnName": "szcyclecode"
+        },
+        {
+            "columnName": "dtregistration"
+        },
+        {
+            "columnName": "szmarketsegdesc"
+        },
+        {
+            "columnName": "szrateplan"
+        },
+        {
+            "columnName": "ioddays"
+        },
+        {
+            "columnName": "szbucketcode"
+        },
+        {
+            "columnName": "fosamt"
+        },
+        {
+            "columnName": "foverdueamt"
+        },
+        {
+            "columnName": "fbucket0"
+        },
+        {
+            "columnName": "fbucket1"
+        },
+        {
+            "columnName": "fbucket2"
+        },
+        {
+            "columnName": "fbucket3"
+        },
+        {
+            "columnName": "fbucket4"
+        },
+        {
+            "columnName": "fbucket5"
+        },
+        {
+            "columnName": "fbucket6"
+        },
+        {
+            "columnName": "fbucketamt7"
+        },
+        {
+            "columnName": "szproductcode"
+        },
+        {
+            "columnName": "szmoccode"
+        },
+        {
+            "columnName": "mfs04"
+        },
+        {
+            "columnName": "szmktcode"
+        },
+        {
+            "columnName": "szMktCode"
+        },
+        {
+            "columnName": "szcollectioncode"
+        },
+        {
+            "columnName": "szcollectioncode"
+        },
+        {
+            "columnName": "priority"
+        },
+        {
+            "columnName": "zriskcode"
+        },
+        {
+            "columnName": "szpaymenttype"
+        }
+    ]
+}

@@ -1,0 +1,93 @@
+{  
+   "name":"Device Finance Report",
+   "type":"Standard Report",
+   "frequency":"Monthly",
+   "estimatedDuration":"60",
+   "inputs":[  
+	{  
+         "columnName":"szorgcode ",
+         "allowedOperators":"equals",
+         "allowMultiple":false,
+         "allowFileUpload":false,
+         "allowedValues":[  
+            {  
+               "key":1,
+               "text":"orgCode",
+               "value":"001"
+            }
+         ]
+      },
+	  {  
+         "columnName":"szpackagecode ",
+         "allowedOperators":"equals",
+         "allowMultiple":true,
+         "allowFileUpload":false,
+         "allowedValues":[  
+            {  "key":1, "text":"packageCode", "value":"41805"  },
+			{  "key":1, "text":"packageCode", "value":"41851"  },
+			{  "key":1, "text":"packageCode", "value":"41866"  },
+			{  "key":1, "text":"packageCode", "value":"41869"  },
+			{  "key":1, "text":"packageCode", "value":"41844"  }
+         ]
+      },
+	  {  
+         "columnName":"cstatus ",
+         "allowedOperators":"equals",
+         "allowMultiple":true,
+         "allowFileUpload":false,
+         "allowedValues":[  
+            {  "key":1, "text":"status", "value":"A"  },
+			{  "key":1, "text":"status", "value":"D"  }
+         ]
+      },
+	  {  
+         "columnName":"ipackageseqno ",
+         "allowedOperators":"equals",
+         "allowMultiple":true,
+         "allowFileUpload":false,
+         "allowedValues":[  
+            {  "key":1, "text":"packageSeqNo", "value":"357647951"  }
+         ]
+      }
+   ],
+   "outputs":[  
+		{"columnName" : "Account Number"},
+		{"columnName" : "Customer Name"},
+		{"columnName" : "Rate Plan"},
+		{"columnName" : "Account Status"},
+		{"columnName" : "Risk Code"},
+		{"columnName" : "Related account Y/N"},
+		{"columnName" : "PTP Live Y/N"},
+		{"columnName" : "Payment Method"},
+		{"columnName" : "Market Segment"},
+		{"columnName" : "Market Code Desc"},
+		{"columnName" : "Colletion Code Desc"},
+		{"columnName" : "MOC Code"},
+		{"columnName" : "Credit Limit"},
+		{"columnName" : "Debt Category"},
+		{"columnName" : "OD days"},
+		{"columnName" : "Ageing Bucket"},
+		{"columnName" : "Total Outstanding"},
+		{"columnName" : "Current"},
+		{"columnName" : "30d"},
+		{"columnName" : "60d"},
+		{"columnName" : "90d"},
+		{"columnName" : "120d"},
+		{"columnName" : "150d"},
+		{"columnName" : "180d"},
+		{"columnName" : "210d+"},
+		{"columnName" : "MSISDN"},
+		{"columnName" : "MSISDN status"},
+		{"columnName" : "Package Active Date"},
+		{"columnName" : "Workflow Code"},
+		{"columnName" : "Workflow State"},
+		{"columnName" : "Last Payment Amt"},
+		{"columnName" : "Date Last Payment"},
+		{"columnName" : "Non Deact SI cnt"},
+		{"columnName" : "BC"},
+		{"columnName" : "IC No"},
+		{"columnName" : "OLD IC"},
+		{"columnName" : "Passport No"},
+		{"columnName" : "Other ID"}
+   ]
+}	
